@@ -13,6 +13,7 @@ const typeDefs = gql`
   type Query {
     hello: String
     products: [Product!]!
+    product(id: ID!): Product
   }
   type Product {
     name: String!
@@ -20,6 +21,7 @@ const typeDefs = gql`
     quantity: Int!
     price: Float!
     onSale: Boolean!
+    image:String!
   }
 `;
 
@@ -27,6 +29,10 @@ const resolvers = {
   Query: {
     hello: () => "Hello world!",
     products: () => products,
+    product: (parent, args, context) =>{
+      const product = products.find((product) => product.id === args.id);
+      return product;
+    }
   },
 };
 const server = new ApolloServer({
