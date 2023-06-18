@@ -7,21 +7,18 @@ exports.Query = {
     if (filter) {
       const { onSale, avgRating } = filter;
       if (onSale) {
-       filteredProducts = products.filter(
-          (product) => product.onSale
-        )
+        filteredProducts = products.filter((product) => product.onSale);
       }
 
-    
       if (avgRating && [1, 2, 3, 4, 5].includes(avgRating)) {
-       filteredProducts = filteredProducts.filter((product) => {
+        filteredProducts = filteredProducts.filter((product) => {
           let sumRating = 0;
-          let numOfReviews = 0
+          let numOfReviews = 0;
 
           reviews.forEach((review) => {
             if (review.productId === product.id) {
               sumRating += review.rating;
-              numOfReviews +=1
+              numOfReviews += 1;
             }
           });
 
@@ -29,7 +26,7 @@ exports.Query = {
 
           console.log(product.name, numOfReviews, sumRating, avgProductRating);
 
-          return avgProductRating >= avgRating
+          return avgProductRating >= avgRating;
         });
       }
     }
@@ -37,7 +34,7 @@ exports.Query = {
     return filteredProducts;
   },
 
-  categories: () => {
+  categories: (parent, args, context) => {
     return context.categories;
   },
 

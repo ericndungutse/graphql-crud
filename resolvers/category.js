@@ -20,5 +20,5 @@ exports.Category = {
         ));
 
     return filteredCategoryProducts;
-  },
+  }
 };
