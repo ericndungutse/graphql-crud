@@ -11,4 +11,22 @@ exports.Mutation = {
 
     return newCategory;
   },
+
+  addProduct: (parent, args, context)=>{
+    const newProduct = {
+      id: uuid(),
+      name:args.input.name,
+      description:args.input.description,
+      quantity:args.input.quantity,
+      price: args.input.price,
+      image: args.input.image,
+      onSale: true,
+      categoryId: args.input.categoryId,
+    };
+
+    context.products.push(newProduct);
+
+    console.log(context.products[context.products.length - 1])
+    return newProduct;
+  }
 };
